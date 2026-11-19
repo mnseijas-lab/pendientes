@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mis pendientes</title>
+<meta name="theme-color" content="#c8553d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-48.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pendientes">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div class="cab">
+      <p class="fecha" id="fecha"></p>
+      <button type="button" class="icono" id="btn-ajustes" aria-label="Avisos y respaldo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17h12l-1.5-2v-4a4.5 4.5 0 0 0-9 0v4L6 17zM10 20a2 2 0 0 0 4 0"/></svg>
+      </button>
+    </div>
+    <h1>Mis pendientes</h1>
+    <p class="resumen" id="resumen"></p>
+  </header>
+
+  <form class="anotar" id="form" autocomplete="off">
+    <input type="text" id="texto" placeholder="Qué hay que hacer" aria-label="Qué hay que hacer" maxlength="200">
+    <div class="chips" id="chips-area" role="group" aria-label="Dónde"></div>
+    <div class="fechas">
+      <label class="campo"><span id="lbl-desde">Fecha</span><input type="date" id="desde"></label>
+      <label class="campo" id="campo-hasta" hidden><span>Hasta</span><input type="date" id="hasta"></label>
+      <button type="button" class="link" id="btn-rango">+ Varios días</button>
+    </div>
+    <div class="fila-final">
+      <p class="pista" id="pista">También podés tocar el micrófono y decir, por ejemplo: «agendar leche en el súper para el viernes».</p>
+      <button type="submit" class="btn" id="btn-agregar">Agregar</button>
+    </div>
+  </form>
+
+  <nav class="filtros" id="filtros" aria-label="Filtrar por lugar"></nav>
+  <div id="listas"></div>
+</main>
+
+<button type="button" class="mic" id="mic" aria-label="Hablar para anotar un pendiente" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+</button>
+
+<div class="velo" id="velo" hidden>
+  <div class="escucha" role="dialog" aria-modal="true" aria-label="Escuchando">
+    <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="estado" id="escucha-estado">Escuchando…</p>
+    <p class="dictado" id="dictado">Decí qué hay que hacer, dónde y para cuándo.</p>
+    <div class="acciones">
+      <button type="button" class="btn sec" id="escucha-cancelar">Cancelar</button>
+      <button type="button" class="btn" id="escucha-listo">Listo</button>
+    </div>
+  </div>
+</div>
+
+<div class="velo" id="velo-ajustes" hidden>
+  <div class="hoja" role="dialog" aria-modal="true" aria-label="Avisos y respaldo">
+    <h2>Avisos</h2>
+    <p class="chico" id="estado-avisos"></p>
+    <button type="button" class="btn" id="btn-avisos">Activar avisos</button>
+    <p class="chico">Los avisos aparecen cuando abrís la app. Para que suene con la app cerrada, en cada pendiente con fecha tocá «Agregar al calendario».</p>
+    <h2>Respaldo</h2>
+    <p class="chico">Tus pendientes se guardan solo en este celular. Copiá el respaldo de vez en cuando y guardalo en un mensaje o nota.</p>
+    <div class="acciones izq">
+      <button type="button" class="btn sec" id="btn-copiar">Copiar respaldo</button>
+      <button type="button" class="btn sec" id="btn-pegar">Restaurar</button>
+    </div>
+    <textarea id="caja-respaldo" rows="4" hidden placeholder="Pegá acá el respaldo y tocá Restaurar de nuevo"></textarea>
+    <div class="acciones"><button type="button" class="btn" id="cerrar-ajustes">Cerrar</button></div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="parser.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
